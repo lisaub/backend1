@@ -50,7 +50,7 @@ Productos
 - PUT /api/products/:pid: Actualiza un producto por su ID.
 - DELETE /api/products/:pid: Elimina un producto por su ID.
 
-## Carritos
+Carritos
 - POST /api/carts: Crea un nuevo carrito.
 - GET /api/carts/:cid: Obtiene un carrito por su ID.
 - POST /api/carts/:cid/product/:pid: Agrega un producto a un carrito.
@@ -58,10 +58,24 @@ Productos
 ## Ejemplos de Uso
 Puedes utilizar herramientas como Postman para interactuar con los endpoints. Aquí hay algunos ejemplos de cómo usar los endpoints:
 
-## Agregar un Producto
-JSON
+### Local
+Listar todos los productos:
 ```bash
-POST /api/products
+GET http://localhost:8080/api/products
+```
+
+Obtener un producto por ID:
+```bash
+GET http://localhost:8080/api/products/101
+```
+
+Agregar un nuevo producto:
+```bash
+POST http://localhost:8080/api/products
+```
+
+Content-Type: application/json
+```bash
 {
   "title": "Smartphone XYZ",
   "description": "Un smartphone de última generación",
@@ -73,14 +87,61 @@ POST /api/products
 }
 ```
 
-## Crear un Carrito
-JSON
+Crear un nuevo carrito:
+```bash
+POST http://localhost:8080/api/carts
+```
+
+Obtener un carrito por ID:
+```bash
+GET http://localhost:8080/api/carts/1
+```
+
+Agregar un producto a un carrito:
+```bash
+POST http://localhost:8080/api/carts/1/product/101
+```
+
+### Producción
+Listar todos los productos:
+```bash
+GET /api/products
+```
+
+Obtener un producto por ID:
+```bash
+GET /api/products/:pid
+```
+
+Agregar un nuevo producto:
+```bash
+POST /api/products
+```
+
+Content-Type: application/json
+```bash
+{
+  "title": "Smartphone XYZ",
+  "description": "Un smartphone de última generación",
+  "price": 699,
+  "thumbnail": ["ruta/a/la/imagen1.jpg", "ruta/a/la/imagen2.jpg"],
+  "code": "XYZ123",
+  "stock": 100,
+  "category": "Smartphones"
+}
+```
+
+Crear un nuevo carrito:
 ```bash
 POST /api/carts
 ```
 
-## Agregar un Producto a un Carrito
-JSON
+Obtener un carrito por ID:
+```bash
+GET /api/carts/:cid
+```
+
+Agregar un producto a un carrito:
 ```bash
 POST /api/carts/:cid/product/:pid
 ```
