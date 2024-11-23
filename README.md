@@ -24,15 +24,21 @@ package.json
 
 ## Instalación
 Clona el repositorio:
-git clone <URL_DEL_REPOSITORIO>
+```bash
+git clone https://github.com/lisaub/backend1.git
 cd MobileMania
+```
 
-Instala las dependencias:
+## Instala las dependencias:
+```bash
 npm install
+```
 
 ## Uso
 Inicia el servidor:
+```bash
 npm start
+```
 
 El servidor estará escuchando en el puerto 8080.
 
@@ -54,7 +60,7 @@ Puedes utilizar herramientas como Postman para interactuar con los endpoints. Aq
 
 ## Agregar un Producto
 JSON
-
+```bash
 POST /api/products
 {
   "title": "Smartphone XYZ",
@@ -65,14 +71,16 @@ POST /api/products
   "stock": 100,
   "category": "Smartphones"
 }
+```
 
 ## Crear un Carrito
 JSON
+```bash
 POST /api/carts
+```
 
 ## Agregar un Producto a un Carrito
 JSON
+```bash
 POST /api/carts/:cid/product/:pid
-
-## Contribuciones
-Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull request para discutir cualquier cambio que te gustaría hacer.
+```
