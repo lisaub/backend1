@@ -44,16 +44,16 @@ El servidor estará escuchando en el puerto 8080.
 
 ## Endpoints
 Productos
-GET /api/products: Lista todos los productos.
-GET /api/products/:pid: Obtiene un producto por su ID.
-POST /api/products: Agrega un nuevo producto.
-PUT /api/products/:pid: Actualiza un producto por su ID.
-DELETE /api/products/:pid: Elimina un producto por su ID.
+- GET /api/products: Lista todos los productos.
+- GET /api/products/:pid: Obtiene un producto por su ID.
+- POST /api/products: Agrega un nuevo producto.
+- PUT /api/products/:pid: Actualiza un producto por su ID.
+- DELETE /api/products/:pid: Elimina un producto por su ID.
 
 ## Carritos
-POST /api/carts: Crea un nuevo carrito.
-GET /api/carts/:cid: Obtiene un carrito por su ID.
-POST /api/carts/:cid/product/:pid: Agrega un producto a un carrito.
+- POST /api/carts: Crea un nuevo carrito.
+- GET /api/carts/:cid: Obtiene un carrito por su ID.
+- POST /api/carts/:cid/product/:pid: Agrega un producto a un carrito.
 
 ## Ejemplos de Uso
 Puedes utilizar herramientas como Postman para interactuar con los endpoints. Aquí hay algunos ejemplos de cómo usar los endpoints:
