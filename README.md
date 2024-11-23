@@ -19,3 +19,60 @@ src/
 .gitignore
 package-lock.json
 package.json
+
+```
+
+## Instalación
+Clona el repositorio:
+git clone <URL_DEL_REPOSITORIO>
+cd MobileMania
+
+Instala las dependencias:
+npm install
+
+## Uso
+Inicia el servidor:
+npm start
+
+El servidor estará escuchando en el puerto 8080.
+
+## Endpoints
+Productos
+GET /api/products: Lista todos los productos.
+GET /api/products/:pid: Obtiene un producto por su ID.
+POST /api/products: Agrega un nuevo producto.
+PUT /api/products/:pid: Actualiza un producto por su ID.
+DELETE /api/products/:pid: Elimina un producto por su ID.
+
+## Carritos
+POST /api/carts: Crea un nuevo carrito.
+GET /api/carts/:cid: Obtiene un carrito por su ID.
+POST /api/carts/:cid/product/:pid: Agrega un producto a un carrito.
+
+## Ejemplos de Uso
+Puedes utilizar herramientas como Postman para interactuar con los endpoints. Aquí hay algunos ejemplos de cómo usar los endpoints:
+
+## Agregar un Producto
+JSON
+
+POST /api/products
+{
+  "title": "Smartphone XYZ",
+  "description": "Un smartphone de última generación",
+  "price": 699,
+  "thumbnail": ["ruta/a/la/imagen1.jpg", "ruta/a/la/imagen2.jpg"],
+  "code": "XYZ123",
+  "stock": 100,
+  "category": "Smartphones"
+}
+
+## Crear un Carrito
+JSON
+POST /api/carts
+
+## Agregar un Producto a un Carrito
+JSON
+POST /api/carts/:cid/product/:pid
+
+## Contribuciones
+Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull request para discutir cualquier cambio que te gustaría hacer.
