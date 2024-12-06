@@ -18,7 +18,24 @@ class ProductManager {
 
   addProduct(product) {
     const products = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
-    product.id = products.length ? products[products.length - 1].id + 1 : 1;
+
+    // Validate required fields
+    const { title, description, price, code, stock, category } = product;
+    if (!title || !description || !price || !code || !stock || !category) {
+      throw new Error("All fields are mandatory (id, title, description, price, thumbnail, code, stock, category, status) except thumbnails.");
+    }
+
+    // Validate unique code
+    const productExist = products.find(p => p.code === code);
+    if (productExist) {
+      throw new Error(`A product already exists with code ${code}`);
+    }
+
+    // Generate numeric ID
+    const lastProduct = products.reduce((max, product) => product.id > max ? product.id : max, 0);
+    let storeID=parseInt(lastProduct)+1;
+    product.id = storeID;
+
     products.push(product);
     fs.writeFileSync(this.filePath, JSON.stringify(products, null, 2));
     return product;
@@ -27,8 +44,18 @@ class ProductManager {
   updateProduct(id, updatedProduct) {
     const products = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
     const index = products.findIndex(product => product.id === id);
+
     if (index !== -1) {
-      products[index] = { ...products[index], ...updatedProduct };
+      // Validate fields to update
+      const allowedFields = ["title", "description", "price", "thumbnail", "code", "stock", "status", "category"];
+      const updateData = {};
+      for (const key in updatedProduct) {
+        if (allowedFields.includes(key)) {
+          updateData[key] = updatedProduct[key];
+        }
+      }
+
+      products[index] = { ...products[index], ...updateData };
       fs.writeFileSync(this.filePath, JSON.stringify(products, null, 2));
       return products[index];
     }

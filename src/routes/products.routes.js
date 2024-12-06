@@ -4,30 +4,64 @@ const ProductManager = require('../managers/productManager');
 
 const productManager = new ProductManager();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const limit = req.query.limit;
-  const products = productManager.getProducts(limit);
-  res.json(products);
+  try {
+    const products = await productManager.getProducts(limit);
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Error retrieving products" });
+  }
 });
 
-router.get('/:pid', (req, res) => {
-  const product = productManager.getProductById(req.params.pid);
-  res.json(product);
+router.get('/:pid', async (req, res) => {
+  try {
+    const product = await productManager.getProductById(req.params.pid);
+    if (!product) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+    res.json(product);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Error retrieving product" });
+  }
 });
 
-router.post('/', (req, res) => {
-  const newProduct = productManager.addProduct(req.body);
-  res.json(newProduct);
+router.post('/', async (req, res) => {
+  try {
+    const newProduct = await productManager.addProduct(req.body);
+    res.status(201).json(newProduct);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ message: error.message });
+  }
 });
 
-router.put('/:pid', (req, res) => {
-  const updatedProduct = productManager.updateProduct(req.params.pid, req.body);
-  res.json(updatedProduct);
+router.put('/:pid', async (req, res) => {
+  try {
+    const updatedProduct = await productManager.updateProduct(req.params.pid, req.body);
+    if (!updatedProduct) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+    res.json(updatedProduct);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ message: error.message });
+  }
 });
 
-router.delete('/:pid', (req, res) => {
-  const deletedProduct = productManager.deleteProduct(req.params.pid);
-  res.json(deletedProduct);
+router.delete('/:pid', async (req, res) => {
+  try {
+    const deletedProduct = await productManager.deleteProduct(req.params.pid);
+    if (!deletedProduct) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+    res.send({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Error deleting product" });
+  }
 });
 
 module.exports = router;

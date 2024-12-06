@@ -1,22 +1,46 @@
 const express = require('express');
 const router = express.Router();
 const CartManager = require('../managers/cartManager');
+const ProductManager = require('../managers/productManager');
 
 const cartManager = new CartManager();
+const productManager = new ProductManager();
 
 router.post('/', (req, res) => {
-  const newCart = cartManager.createCart();
-  res.json(newCart);
+  try {
+    const newCart = cartManager.createCart();
+    res.status(201).json(newCart);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Error creating cart" });
+  }
 });
 
 router.get('/:cid', (req, res) => {
-  const cart = cartManager.getCartById(req.params.cid);
-  res.json(cart);
+  try {
+    const cart = cartManager.getCartById(req.params.cid);
+    if (!cart) {
+      return res.status(404).send({ message: "Cart not found" });
+    }
+    res.json(cart);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Error retrieving cart" });
+  }
 });
 
-router.post('/:cid/product/:pid', (req, res) => {
-  const updatedCart = cartManager.addProductToCart(req.params.cid, req.params.pid);
-  res.json(updatedCart);
+router.post('/:cid/product/:pid', async (req, res) => {
+  try {
+    const product = await productManager.getProductById(req.params.pid);
+    if (!product) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+    const updatedCart = await cartManager.addProductToCart(req.params.cid, req.params.pid);
+    res.json(updatedCart);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Error adding product to cart" });
+  }
 });
 
 module.exports = router;

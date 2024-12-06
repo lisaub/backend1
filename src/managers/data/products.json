@@ -1,6 +1,6 @@
 [
   {
-    "id": "101",
+    "id": 101,
     "title": "Smartphone XYZ",
     "description": "Un smartphone de última generación",
     "price": 799,
@@ -14,7 +14,7 @@
     "status": true
   },
   {
-    "id": "102",
+    "id": 102,
     "title": "Smartwatch ABC",
     "description": "Un reloj inteligente con múltiples funciones",
     "price": 199,
@@ -27,32 +27,29 @@
     "status": true
   },
   {
-    "id": "103",
-    "title": "Auriculares DEF",
+    "id": 103,
+    "title": "Auriculares ABC",
     "description": "Auriculares inalámbricos con cancelación de ruido",
-    "price": 149,
+    "price": 199,
     "thumbnail": [
       "ruta/a/la/imagen4.jpg"
     ],
     "code": "DEF789",
-    "stock": 75,
+    "stock": 90,
     "category": "Auriculares",
     "status": true
   },
   {
-    "id": "1031"
-  },
-  {
-    "title": "Smartphone XYZ",
+    "title": "Smartphone",
     "description": "Un smartphone de última generación",
-    "price": 699,
+    "price": 600,
     "thumbnail": [
       "ruta/a/la/imagen1.jpg",
       "ruta/a/la/imagen2.jpg"
     ],
-    "code": "XYZ123",
+    "code": "1234",
     "stock": 100,
     "category": "Smartphones",
-    "id": "10311"
+    "id": 104
   }
 ]

@@ -6,17 +6,25 @@ class CartManager {
     this.filePath = path.join(__dirname, 'data', 'carts.json');
   }
 
-  createCart() {
+  getCarts() {
     const carts = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
-    const newCart = { id: carts.length ? carts[carts.length - 1].id + 1 : 1, products: [] };
-    carts.push(newCart);
-    fs.writeFileSync(this.filePath, JSON.stringify(carts, null, 2));
-    return newCart;
+    return carts;
   }
 
   getCartById(id) {
     const carts = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
     return carts.find(cart => cart.id === id);
+  }
+
+  createCart() {
+    const carts = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
+    const newCart = {
+      id: carts.length ? carts[carts.length - 1].id + 1 : 1,
+      products: []
+    };
+    carts.push(newCart);
+    fs.writeFileSync(this.filePath, JSON.stringify(carts, null, 2));
+    return newCart;
   }
 
   addProductToCart(cartId, productId) {
