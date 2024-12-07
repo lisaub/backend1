@@ -16,10 +16,15 @@ class CartManager {
     return carts.find(cart => cart.id === id);
   }
 
-  createCart() {
+    createCart() {
     const carts = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
+
+    // Generate a unique string ID
+    const lastCart = carts.reduce((max, cart) => cart.id > max ? cart.id : max, '0');
+    const newId = (parseInt(lastCart, 10) + 1).toString();
+
     const newCart = {
-      id: carts.length ? carts[carts.length - 1].id + 1 : 1,
+      id: newId,
       products: []
     };
     carts.push(newCart);
